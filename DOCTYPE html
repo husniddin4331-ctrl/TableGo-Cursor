@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#14241c">
+  <title>TableGo — меню на столе</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect rx='16' width='64' height='64' fill='%23c24d24'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='28' fill='white' font-family='Arial'%3ETG%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="nav" id="nav">
+    <a class="logo" href="#top"><i>TG</i> TableGo</a>
+    <nav class="nav-links">
+      <a href="#menu" data-i18n="nav_menu">Меню</a>
+      <a href="#records" data-i18n="nav_records">Рекорды</a>
+    </nav>
+    <div class="langs" role="group" aria-label="Language">
+      <button type="button" data-lang="ru" class="is-active">RU</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="uz">UZ</button>
+    </div>
+    <button type="button" class="cart-btn" id="cartBtn">
+      <span data-i18n="cart">Корзина</span>
+      <b id="cartCount">0</b>
+    </button>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="welcome">
+      <div class="welcome-track">
+        <p data-i18n="welcome">Добро пожаловать за стол. Садитесь поудобнее: плов из казана, шашлык с углей, тёплая лепёшка и чайник чая уже ждут вас. Отметьте блюда — и кухня начнёт готовить. Приятного аппетита</p>
+        <p data-i18n="welcome" aria-hidden="true">Добро пожаловать за стол. Садитесь поудобнее: плов из казана, шашлык с углей, тёплая лепёшка и чайник чая уже ждут вас. Отметьте блюда — и кухня начнёт готовить. Приятного аппетита</p>
+      </div>
+    </div>
+    <div class="hero-grid">
+      <div>
+        <p class="kicker" data-i18n="hero_kicker">Электронное меню для ресторана</p>
+        <h1>
+          <span data-i18n="hero_title_1">Меню на столе.</span>
+          <span data-i18n="hero_title_2">Заказ сразу на кухне.</span>
+        </h1>
+        <p class="hero-text" data-i18n="hero_text">Гость выбирает блюда и отправляет заказ. Сумма считается сама, а каждый чек остаётся в рекордах этого браузера.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#table" data-i18n="cta_menu">Открыть меню</a>
+          <a class="btn btn-ghost" href="#records" data-i18n="cta_records">Рекорды</a>
+        </div>
+      </div>
+      <figure class="hero-photo">
+        <img src="img/hero.jpg" alt="TableGo">
+        <figcaption class="ticket">
+          <span data-i18n="hero_ticket_kicker">На кухню</span>
+          <strong>№5</strong>
+          <ul>
+            <li><span data-i18n="hero_line_1">Салат</span><b>2</b></li>
+            <li><span data-i18n="hero_line_2">Плов</span><b>1</b></li>
+            <li><span data-i18n="hero_line_3">Напиток</span><b>2</b></li>
+          </ul>
+          <em data-i18n="hero_ticket_note">Сумма считается сама</em>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="statbar" aria-label="stats">
+    <article class="stat"><b id="statDishes">15</b><span data-i18n="stat_dishes">блюд в меню</span></article>
+    <article class="stat"><b id="statTables">12</b><span data-i18n="stat_tables">столов в зале</span></article>
+    <article class="stat"><b id="statBest">—</b><span data-i18n="stat_best">рекорд чека</span></article>
+    <article class="stat"><b id="statOrders">0</b><span data-i18n="stat_orders">заказов сегодня</span></article>
+  </section>
+
+  <section class="band" id="table">
+    <div class="wrap">
+      <p class="kicker" data-i18n="table_kicker">Стол</p>
+      <h2 data-i18n="table_title">За каким вы столом?</h2>
+      <p class="lead" data-i18n="table_text">Номер попадёт в чек вместе с блюдами. Выбор запоминается в этом браузере.</p>
+      <div id="tableGrid" class="table-grid"></div>
+      <p id="tableNow" class="table-now"></p>
+    </div>
+  </section>
+
+  <section class="band" id="menu">
+    <div class="wrap">
+      <p class="kicker" data-i18n="menu_kicker">Меню</p>
+      <h2 data-i18n="menu_title">Выберите блюда</h2>
+      <div id="cats" class="cats"></div>
+      <div id="dishGrid" class="dish-grid"></div>
+    </div>
+  </section>
+
+  <section class="band" id="records">
+    <div class="wrap">
+      <p class="kicker" data-i18n="records_kicker">Рекорды</p>
+      <h2 data-i18n="records_title">Чеки этого браузера</h2>
+      <p class="lead" data-i18n="records_text">Заказы хранятся локально. Закрытие Cursor и блокировка компьютера их не стирают.</p>
+      <div class="record-kpis">
+        <article class="stat"><b id="recBest">—</b><span data-i18n="stat_best">рекорд чека</span></article>
+        <article class="stat"><b id="recCount">0</b><span data-i18n="rec_count">всего чеков</span></article>
+        <article class="stat"><b id="recPop">—</b><span data-i18n="rec_pop">популярное блюдо</span></article>
+      </div>
+      <div id="recordList" class="record-list"></div>
+      <button type="button" class="btn btn-danger" id="clearRecords" data-i18n="rec_clear">Очистить рекорды</button>
+    </div>
+  </section>
+
+  <section class="qr-band" id="qr">
+    <div class="wrap qr-grid">
+      <div class="qr-frame"><img src="tablego-qr.png" alt="QR TableGo" width="280" height="280"></div>
+      <div>
+        <p class="kicker" data-i18n="qr_kicker">Один QR для зала</p>
+        <h2 data-i18n="qr_title">Гость садится и сканирует код</h2>
+        <p data-i18n="qr_text">Код открывает это меню в вашей сети. Рекорды у каждого телефона свои: они лежат в локальном хранилище браузера.</p>
+        <p class="qr-url">http://192.168.100.32:3080/</p>
+      </div>
+    </div>
+    <div class="wrap footer">
+      <span>TableGo · меню и рекорды</span>
+      <a href="tablego-qr.png" download="tablego-qr.png">QR PNG</a>
+    </div>
+  </section>
+
+  <div id="cartOverlay" class="overlay hidden"></div>
+  <aside class="cart hidden" id="cart" aria-label="cart">
+    <header>
+      <h2 data-i18n="cart_title">Ваш заказ</h2>
+      <button type="button" class="icon-btn" id="cartClose" aria-label="close">×</button>
+    </header>
+    <div class="cart-body" id="cartBody"></div>
+    <footer>
+      <label for="comment" data-i18n="comment">Комментарий к заказу</label>
+      <textarea id="comment" maxlength="240" placeholder="Без лука, поострее, соус отдельно…"></textarea>
+      <div class="bill-total"><span data-i18n="total">Итого</span><b id="cartTotal">0</b></div>
+      <button type="button" class="btn send" id="sendBtn" data-i18n="send">Отправить заказ</button>
+    </footer>
+  </aside>
+
+  <nav class="one-dock" aria-label="TableGo">
+    <button type="button" data-go="menu" data-i18n="nav_menu">Меню</button>
+    <button type="button" data-go="records" data-i18n="nav_records">Рекорды</button>
+    <div class="langs">
+      <button type="button" data-lang="ru">RU</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="uz">UZ</button>
+    </div>
+  </nav>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
